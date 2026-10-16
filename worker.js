@@ -1,4 +1,3 @@
-
 const cors = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -50,14 +49,15 @@ export default {
     }
 
     if (!env.BREVO_API_KEY || !env.BREVO_LIST_ID) {
-      console.error("Missing Brevo Worker configuration");
-      return json({ error: "Brevo configuration is missing." }, 500);
+      return json({
+        error: "DIAG v2 - key:" + (env.BREVO_API_KEY ? "ok" : "MISSING") +
+               " list:" + (env.BREVO_LIST_ID ? "ok" : "MISSING")
+      }, 500);
     }
 
     const listId = Number(env.BREVO_LIST_ID);
 
     if (!Number.isInteger(listId) || listId <= 0) {
-      console.error("Invalid BREVO_LIST_ID");
       return json({ error: "Brevo list configuration is invalid." }, 500);
     }
 
