@@ -29,6 +29,7 @@ export default {
    });
    if (!response.ok) {
      const body=await response.text();
+     console.error("Brevo API error:", response.status, body);
      // A duplicate contact is normally updated by updateEnabled; surface other errors safely.
      return json({error:"Brevo could not add this address. Please try again."},502);
    }
