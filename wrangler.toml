@@ -1,6 +1,7 @@
 name = "web2api"
 main = "worker.js"
 compatibility_date = "2026-10-16"
+keep_vars = true
 
 [assets]
 directory = "./"
