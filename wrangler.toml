@@ -3,5 +3,8 @@ main = "worker.js"
 compatibility_date = "2026-10-16"
 keep_vars = true
 
+[vars]
+BREVO_LIST_ID = "7"
+
 [assets]
 directory = "./"
