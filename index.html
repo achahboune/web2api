@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Web2API Pro — Turn websites into APIs</title>
+<meta name="description" content="Turn websites into structured data and API endpoints without writing scrapers. Join the early-access list.">
+<style>
+:root{color-scheme:dark;--bg:#090d18;--panel:#111827;--line:#263247;--muted:#9ba9bf;--accent:#8b5cf6;--green:#a3e635}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 Inter,system-ui,sans-serif;background:radial-gradient(ellipse at 75% 0,#1b1640 0,transparent 45%),var(--bg);color:#f8fafc}
+.wrap{max-width:1100px;margin:auto;padding:24px}.nav{display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800;letter-spacing:-.04em;font-size:20px}.brand span{color:var(--green)}.pill{border:1px solid var(--line);padding:7px 12px;border-radius:99px;color:var(--muted);font-size:13px}
+.hero{padding:90px 0 55px;max-width:780px}.eyebrow{color:var(--green);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(42px,7vw,72px);line-height:1.03;letter-spacing:-.055em;margin:18px 0}h1 em{font-style:normal;color:#b7a3ff}.lead{font-size:19px;color:var(--muted);max-width:650px}.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.btn{border:0;background:var(--green);color:#10150b;font-weight:800;padding:13px 19px;border-radius:12px;cursor:pointer}.btn:hover{filter:brightness(1.08)}.proof{color:var(--muted);font-size:13px;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0 70px}.feature,.formbox{background:linear-gradient(145deg,#151e30,#0e1421);border:1px solid var(--line);border-radius:18px;padding:22px}.feature h3{margin:8px 0}.feature p{color:var(--muted);margin:0}.formbox{max-width:700px;margin:0 auto 80px;padding:30px}.formbox h2{font-size:28px;margin:0 0 6px}.formbox p{color:var(--muted);margin:0 0 20px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:13px;color:#cbd5e1}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #344156;background:#080e19;color:white;font:inherit}input:focus,select:focus{outline:2px solid var(--accent)}.consent{font-size:12px;color:var(--muted);margin:12px 0}.status{margin-top:12px;font-size:14px}.foot{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:700px){.hero{padding:65px 0 35px}.grid{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.formbox{padding:20px}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="nav"><div class="brand">Web2API<span> Pro</span></div><div class="pill">Early access · Free to join</div></header>
+<main>
+<section class="hero">
+<div class="eyebrow">Web data, without the scraping headache</div>
+<h1>Turn any website into <em>structured data.</em></h1>
+<p class="lead">Web2API Pro is being built for analysts and teams who need website data in a clean, reusable API — without writing and maintaining scrapers.</p>
+<div class="cta"><a class="btn" href="#waitlist" style="text-decoration:none">Join the early-access list →</a></div>
+<div class="proof">Tell us what you want to extract. We’ll invite selected users to test the first version.</div>
+</section>
+<section class="grid">
+<article class="feature"><div>⚡</div><h3>Less setup</h3><p>Describe the page and the data you need. Skip the first hours of scraper setup.</p></article>
+<article class="feature"><div>🧩</div><h3>Structured output</h3><p>Designed to turn messy page content into fields your tools can use.</p></article>
+<article class="feature"><div>🔌</div><h3>API-ready workflow</h3><p>Our goal: reusable endpoints for research, reporting and automation.</p></article>
+</section>
+<section class="formbox" id="waitlist">
+<h2>Get early access</h2><p>Join the list and help shape the product. No payment, no spam.</p>
+<form id="signup">
+<div class="fields">
+<div class="field"><label for="email">Work email *</label><input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com"></div>
+<div class="field"><label for="role">I am a…</label><select id="role" name="role"><option value="">Choose one</option><option>Data analyst</option><option>Developer</option><option>Researcher</option><option>Founder / operator</option><option>Other</option></select></div>
+<div class="field full"><label for="site">Website you want to extract from (optional)</label><input id="site" name="site" type="url" placeholder="https://example.com"></div>
+<div class="field full"><label for="need">What data do you need? (optional)</label><input id="need" name="need" maxlength="500" placeholder="e.g. product prices, job listings, public directories"></div>
+</div>
+<p class="consent"><label><input type="checkbox" required style="width:auto"> I agree to receive Web2API Pro early-access and product emails. I can unsubscribe anytime.</label></p>
+<button class="btn" type="submit">Request early access</button><div class="status" id="status" role="status"></div>
+</form>
+</section>
+</main>
+<footer class="foot"><span>© 2026 Web2API Pro · Early access</span><span>Only collect data you’re authorized to access. Respect website terms and privacy.</span></footer>
+</div>
+<script>
+const form=document.querySelector('#signup'),status=document.querySelector('#status');
+form.addEventListener('submit',async e=>{e.preventDefault();status.textContent='Submitting…';
+const data=Object.fromEntries(new FormData(form).entries());
+try{const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+const j=await r.json();if(!r.ok)throw new Error(j.error||'Could not submit. Try again.');
+status.textContent='You’re on the list! Check your inbox for a confirmation.';form.reset();
+}catch(err){status.textContent=err.message+' If the issue continues, please try later.'}
+});
+</script></body></html>

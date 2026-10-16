@@ -1,0 +1,8 @@
+name = "web2api-pro-waitlist"
+main = "worker.js"
+compatibility_date = "2026-10-16"
+
+[assets]
+directory = "./"
+# Cloudflare Pages is recommended for the static landing page.
+# Deploy the Worker separately and route /api/* to it, or use Pages Functions.
